@@ -1,130 +1,48 @@
-import java.util.Scanner;
-
-/*******************************************
- * ElevatorDriver.java
- * ------------------name
- * 
- * This class is a driver class for the elevator application that uses
- * 2 other classes to complete its function.
- *******************************************/
-
-public class ElevatorDriver {
-
-	static Scanner input = new Scanner(System.in);
-	//static Elevator hilton  = new Elevator();
-	
-	
-	public static void main(String[] args) {
-		
-		Elevator hilton = null;
-		hilton = new Elevator();
-		String option;
-	
-		System.out.println("Welcome to Micheol's Elevator simulator");
-		System.out.println("Options: ");
-        System.out.println("s - Select a floor");
-        System.out.println("f - Fire alarm");
-        System.out.println("q - Quit");
-        //go through loop until user input q as command
-        while (true) {
-            //take command from user
-            System.out.print("\nEnter command(s, f or q): ");
-            option = input.nextLine();
-            switch (option) {
-                case "s":
-                	hilton.selectFloor();
-                    break;
-                case "f":
-                    hilton.fireAlarm();
-                   break;
-                case "q":
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("invalid input");
-                    break;
-		
-	
-		
-            }
-
-        }
-}
-	
-class Elevator{
-	
-
-	public void selectFloor(){
-		
-		int floor;
-		
-		System.out.println("Enter the floor that you'd like to go to ==> ");
-		floor = input.nextInt();
-		validate(floor);
-	}
-	private void validate(int floor)
-	{
-		
-		int newFloor = 1;
-		if (floor<1)
-		{
-			System.out.println("Invalid Input");
-			System.out.println("Enter the floor that you'd like to go to ==> ");
-			floor = input.nextInt();
-			validate(floor);
-		}
-		else if (floor>100)
-		{
-			System.out.println("invalid input");
-			System.out.println("Enter the floor that you'd like to go to ==> ");
-			floor = input.nextInt();
-			validate(floor);
-		}
-		else
-		{
-			System.out.println("going to floor " + floor);
-				if (newFloor<floor){
-					for(int i=newFloor; i<floor; i++){
-			              System.out.println("Count is: " + i + "..");
-			              newFloor = i;
-					}
+if (floor<1)
+				{
+					System.out.println("Invalid Input");
+					System.out.println("Enter the floor that you'd like to go to ==> ");
+					floor = stdIn.nextInt();
+					selectFloor();
+					//validate(floor);
 				}
-				if (newFloor>floor){
-					for(int i=newFloor; i>floor; i--){
-			              System.out.println("Count is: " + i + "..");
-			              newFloor = i;
-					}
+				else if (floor>100)
+				{
+					System.out.println("invalid input");
+					System.out.println("Enter the floor that you'd like to go to ==> ");
+					floor = stdIn.nextInt();
+					selectFloor();
+					//validate(floor);
 				}
-		}
-		
-		
-		
-		
-		
-		
-	}
-
-	public void fireAlarm(){
-		
-		int newFloor = 12;
-		System.out.println("Danger! You must exit the building now! ");
-			for(int i=newFloor; i<newFloor; i++){
-            System.out.println("Count is: " + i + "..");
-            newFloor = i;
-			}
-		
-		
-		/*
-		 * This method prints a “danger” message and then simulates going to
-		 * the first floor. When triggered by a fire alarm, the elevator should aNempt to go to
-		 * the first floor! See the sample session below for the format of the “danger” message
-		 * 
-		 * 
-		 */
-		
-	}
-	 
- }//end Elevator
-	
-}//end main
-
+				else
+				{
+					System.out.println("\ngoing to floor " + floor);
+						if (floor>0)
+						{
+							for(int i=previousFloor; i<=floor; i++)
+							{
+					              System.out.print(i + "..");
+					              previousFloor = i;
+					              if(previousFloor==floor)
+					              {
+					            	  System.out.println("Ding!");
+					            	  previousFloor=floor;
+					            	  keepGoing = true;
+					              }
+							}
+						}
+						else if (previousFloor>floor)
+						{
+							for(int i=previousFloor; i>=floor; i--)
+							{
+								  System.out.print(i + "..");
+					              previousFloor = i;
+					              if(previousFloor==floor)
+					              {
+					            	  System.out.println("Ding!");
+					            	  previousFloor=floor;
+					            	  keepGoing = true;
+					              }
+							}
+						}
+				}
